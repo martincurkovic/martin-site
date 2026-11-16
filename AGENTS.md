@@ -11,7 +11,8 @@ ToneDen smart links that were used for Instagram and Meta ads. Hosted free as st
 - Plain HTML and CSS. The only JavaScript is `pixel.js`, and it does nothing until a Pixel ID is set.
 - Mobile first and responsive. Test narrow widths.
 - Use **relative paths** (`../style.css`, `img/...`) so the site works from any base URL.
-- No contact form (deliberate, there is no backend). Contact is a `mailto:` link plus social links.
+- No contact form (deliberate, there is no backend). Contact is social links only
+  (Instagram DMs for enquiries); Martin chose to keep his email off the site for now.
 
 ## Layout
 
