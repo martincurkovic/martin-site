@@ -69,26 +69,35 @@ pixel off). Every release page and `links/` sends a PageView, plus a custom `Str
 (with `platform` and `release`) whenever a streaming button is clicked. If you advertise in the
 EU, UK or similar regions, check whether you need a consent banner first.
 
-**Set the domain:** put the live address in `SITE_URL` in `tools/build.py` (for example
-`"https://yourdomain.com"`, no trailing slash) and rebuild. This adds og:url and og:image tags for
-share previews, and writes `sitemap.xml` (it is skipped while `SITE_URL` is empty, because sitemaps
-need full addresses) and adds a `Sitemap:` line to `robots.txt`.
+**The domain:** `SITE_URL` in `tools/build.py` is `https://martincurkovic.com` (no trailing slash). It
+adds the share-card tags (og:url, og:image, canonical), writes `sitemap.xml` and adds the `Sitemap:`
+line to `robots.txt`. Share images are small JPEGs in `img/og/` (made by `tools/optimize-images.py`):
+some chat apps reject WebP share images, so the site's own WebP images aren't used for that. If you
+change domain, edit `SITE_URL`, edit the `CNAME` file, and rebuild.
 
 ## Still to do
 
-- Set `SITE_URL` once the domain is live (above).
 - Decide whether a consent banner is needed for the Meta Pixel (see below).
 - Decide whether to add a VIP email signup (needs a hosted service; a static site can't store emails).
 
 ## Going live (GitHub Pages)
 
-1. Create a GitHub repo and push this folder. The default branch should be `main`.
-2. In the repo: Settings, then Pages, then deploy from the `main` branch, `/ (root)`.
-3. Add your domain under Settings, Pages, Custom domain. GitHub creates a `CNAME` file for you.
-4. At your domain registrar, point DNS at GitHub Pages (GitHub's docs list the current records).
-5. Check that the site and the release pages work on the new domain **before** cancelling GoDaddy,
-   and keep the domain itself renewed. (Your email is on iCloud, not GoDaddy, so moving the DNS
-   won't affect it.)
+The repo is `martincurkovic/martin-site`. The `CNAME` file in the repo root tells GitHub Pages the
+domain is `martincurkovic.com`.
+
+1. Repo Settings, Pages: deploy from the branch you pushed (`master` is fine), folder `/ (root)`.
+2. Same page, Custom domain: `martincurkovic.com`.
+3. At GoDaddy (DNS for the domain lives there), change **only** these records:
+   - the four `A` records for `@` (the apex) become `185.199.108.153`, `185.199.109.153`,
+     `185.199.110.153` and `185.199.111.153` (replacing the two GoDaddy site-builder addresses);
+   - the `CNAME` for `www` becomes `martincurkovic.github.io`.
+   **Leave everything else alone**: the `MX` records (iCloud mail), the `TXT` records (SPF, Apple
+   verification) and the `sig1._domainkey` `CNAME` (iCloud DKIM) are what keep your
+   `@martincurkovic.com` email working.
+4. Wait for DNS to settle, then tick **Enforce HTTPS** in Pages settings (the certificate can take up
+   to an hour to appear).
+5. Check the site, the song pages, share previews and the Meta Pixel on the live domain **before**
+   cancelling the GoDaddy website plan, and keep the domain registration itself renewed.
 
 GitHub Pages on a free personal account needs a public repository. Cloudflare Pages and Netlify
 can host the same files from a private repo.

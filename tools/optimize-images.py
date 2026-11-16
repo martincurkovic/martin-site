@@ -31,3 +31,22 @@ for src, name, width, quality in SPECIAL + COVERS:
     dest = OUT / name
     im.save(dest, "WEBP", quality=quality, method=6)
     print(f"{name:26} {im.width}x{im.height}  {dest.stat().st_size / 1024:.0f} KB")
+
+# Share-card images (og:image) as JPEG: WebP works on Facebook/WhatsApp/iMessage/X but some chat apps
+# (Slack, Discord) reject it. Covers at 600 px, plus a 1200x630 crop of the hero for the home page.
+OG = OUT / "og"
+OG.mkdir(exist_ok=True)
+for src, name, _, _ in COVERS:
+    im = Image.open(SRC / src).convert("RGB")
+    if im.width > 600:
+        im = im.resize((600, round(im.height * 600 / im.width)), Image.LANCZOS)
+    im.save(OG / (Path(name).stem + ".jpg"), "JPEG", quality=82, optimize=True, progressive=True)
+
+hero = Image.open(SRC / "hero-original.jpg").convert("RGB")
+band = round(hero.width * 630 / 1200)            # landscape band that keeps the face (about 38% down the photo)
+top = max(0, min(hero.height - band, round(hero.height * 0.38 - band / 2)))
+hero.crop((0, top, hero.width, top + band)).resize((1200, 630), Image.LANCZOS).save(
+    OG / "home.jpg", "JPEG", quality=82, optimize=True, progressive=True
+)
+sizes = [p.stat().st_size for p in OG.glob("*.jpg")]
+print(f"img/og: {len(sizes)} JPEGs, {sum(sizes) / 1024:.0f} KB total (largest {max(sizes) / 1024:.0f} KB)")

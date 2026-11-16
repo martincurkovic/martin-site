@@ -108,13 +108,15 @@ shutting down, so a new release has to be filled in from Martin's links instead.
   add them to `tools/releases.py` if they exist.
 - `Mixtape Vol.1 [Lo-Fi House]` (`mixtape/`) is not a song: a Bandcamp-only release on 2025-05-09. The old
   ToneDen page also had a SoundCloud link, which is kept for now.
-- `SITE_URL` in `tools/build.py` is empty. Set it once the domain is live: it adds og:url/og:image tags,
-  writes `sitemap.xml` (skipped while empty, sitemaps need absolute URLs) and adds the `Sitemap:` line to
-  `robots.txt`.
+- `SITE_URL` is set to `https://martincurkovic.com` (and `CNAME` holds the same domain). Changing domain means
+  editing both and rebuilding. Share images are JPEGs in `img/og/` (WebP is rejected by some chat apps).
 - The Meta Pixel is live in `pixel.js` (ID 759056146233741) but no consent banner exists yet; check
   whether one is needed for the regions Martin advertises in.
 - VIP email signup was dropped; undecided whether to link to a hosted signup page.
-- GitHub repo, Pages and DNS are not set up yet.
+- The GitHub repo exists (`martincurkovic/martin-site`, pushed). Pages and the DNS change at GoDaddy are
+  still to do: see "Going live" in the README. Martin's email is on iCloud (MX records), so only the apex
+  `A` records and the `www` `CNAME` may change; never touch MX/TXT/DKIM records.
+- Martin chose not to hide his email address; it is in the git history and that is fine.
 
 ## Git
 

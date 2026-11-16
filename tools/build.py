@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Set this once the domain is live (no trailing slash), e.g. "https://martincurkovic.com".
 # Used for og:url / og:image so Facebook and Instagram show a proper preview card.
-SITE_URL = ""
+SITE_URL = "https://martincurkovic.com"
 
 ICON = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E"
@@ -52,10 +52,12 @@ def head(title, desc, prefix, path, cover=None, noindex=False):
         f'<meta property="og:description" content="{e(desc)}">',
         '<meta property="og:type" content="music.song">',
     ]
-    if SITE_URL:
+    if SITE_URL and not noindex:
         og.append(f'<meta property="og:url" content="{e(SITE_URL + path)}">')
         if cover:
-            og.append(f'<meta property="og:image" content="{e(SITE_URL)}/img/{e(cover)}">')
+            # JPEG, not the WebP the site serves: some chat apps reject WebP share images (see optimize-images.py).
+            og.append(f'<meta property="og:image" content="{e(SITE_URL)}/img/og/{Path(cover).stem}.jpg">')
+            og.append('<meta name="twitter:card" content="summary">')
     lines = [
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -66,8 +68,26 @@ def head(title, desc, prefix, path, cover=None, noindex=False):
     if noindex:
         lines.append('<meta name="robots" content="noindex">')
     lines += og
+    if SITE_URL and not noindex:
+        lines.append(f'<link rel="canonical" href="{e(SITE_URL + path)}">')
     lines += [f'<link rel="icon" href="{ICON}">', f'<link rel="stylesheet" href="{prefix}style.css">']
     return "\n".join(lines)
+
+
+def home_head_tags():
+    """Share-card and canonical tags for index.html (its <head> is hand-written, so they sit in a marker block)."""
+    if not SITE_URL:
+        return "  <!-- share-card tags appear here once SITE_URL is set in tools/build.py -->"
+    desc = "Martin Curkovic: music, releases and Deep Six Collective."
+    return "\n".join([
+        '  <meta property="og:title" content="Martin Curkovic">',
+        f'  <meta property="og:description" content="{e(desc)}">',
+        '  <meta property="og:type" content="website">',
+        f'  <meta property="og:url" content="{e(SITE_URL)}/">',
+        f'  <meta property="og:image" content="{e(SITE_URL)}/img/og/home.jpg">',
+        '  <meta name="twitter:card" content="summary_large_image">',
+        f'  <link rel="canonical" href="{e(SITE_URL)}/">',
+    ])
 
 
 def app_uri(key, url):
@@ -319,6 +339,7 @@ def main():
 
     index = ROOT / "index.html"
     src = index.read_text(encoding="utf-8")
+    src = fill(src, "share-card", home_head_tags())
     src = fill(src, "hero-release", hero_block())
     src = fill(src, "releases", index_cards())
     index.write_text(src, encoding="utf-8")
