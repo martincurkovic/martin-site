@@ -1,13 +1,13 @@
 /* Meta (Facebook) Pixel, shared by every release page and the links page.
-   Paste your Pixel ID between the quotes below to switch it on.
-   While PIXEL_ID is empty, nothing is loaded and nothing is sent.
+   The Pixel ID is set below. Clear it (empty quotes) to switch the pixel off:
+   while PIXEL_ID is empty, nothing is loaded and nothing is sent.
 
    Events:
      PageView                    on every page load
      StreamingLinkClick (custom) on every streaming button, with
                                  { platform: 'spotify', release: 'in-the-middle' } */
 (function () {
-  var PIXEL_ID = '';
+  var PIXEL_ID = '759056146233741';
   if (!PIXEL_ID) return;
 
   var release = document.body.getAttribute('data-release') || '';
