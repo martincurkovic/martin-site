@@ -136,6 +136,17 @@ section > .wrap > h2 { font-size: 20px; margin-bottom: 28px; }
   .release-card h3 { font-size: 22px; }
 }
 
+.all-link {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.all-link:hover, .all-link:focus-visible { border-color: var(--fg); }
+
 .label img { width: 100%; max-width: 640px; margin-bottom: 24px; }
 .label p { max-width: 560px; margin: 0 0 12px; }
 .muted { color: var(--muted); }
@@ -148,6 +159,49 @@ footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--m
 
 .bio { max-width: 440px; margin: 0 auto; padding: 32px 20px 48px; text-align: center; }
 .bio .cover { width: 240px; height: 240px; margin: 0 auto 20px; background: var(--chip); object-fit: cover; }
+
+/* Cover art that plays a preview when tapped (previews.js). */
+.bio .cover-wrap {
+  position: relative;
+  display: block;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.bio .cover-wrap .cover { margin: 0; }
+.bio .cover-wrap:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+.cover-wrap .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .6);
+  background: rgba(10, 10, 10, .7);
+}
+.cover-wrap .play-icon svg { width: 26px; height: 26px; fill: #fff; }
+.cover-wrap .i-play { margin-left: 3px; }
+.cover-wrap .i-pause { display: none; }
+.cover-wrap.playing .i-play { display: none; }
+.cover-wrap.playing .i-pause { display: block; }
+.cover-wrap .progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: calc(var(--p, 0) * 100%);
+  background: var(--fg);
+}
 .bio h1 { font-size: 22px; letter-spacing: .08em; }
 .bio .by { margin: 6px 0 24px; color: var(--muted); }
 .bio .stack { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
@@ -170,3 +224,22 @@ footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--m
 .bio .stack a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .bio h2 { font-size: 13px; margin: 36px 0 12px; color: var(--muted); letter-spacing: .2em; }
 .bio .more { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; margin-top: 28px; }
+
+/* "All releases" list on the discography page. */
+.bio .list { margin: 0; padding: 0; list-style: none; text-align: left; border-top: 1px solid var(--line); }
+.bio .list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.bio .list .t { font-weight: 700; letter-spacing: .04em; }
+.bio .list .m { color: var(--muted); font-size: 13px; text-align: right; }
+.bio .list a:hover .t, .bio .list a:focus-visible .t { text-decoration: underline; }
+
+/* 404 page: centre the content vertically. */
+.nf { min-height: 100vh; display: flex; align-items: center; }
+.nf .bio { width: 100%; padding-top: 0; padding-bottom: 0; }

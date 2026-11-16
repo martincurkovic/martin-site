@@ -1,22 +1,27 @@
 # Martin Curkovic: website
 
-A small, fast, static site: a home page, a landing page for each release, and a link-in-bio page.
+A small, fast, static site: a home page, a landing page for each song, and a link-in-bio page.
 No frameworks and no build step for the live site, just HTML, CSS and optimised images.
 
 ## What's in the folder
 
 ```
-index.html            Home page (hero, music, label, contact)
-middle/               In The Middle landing page   (use these for Meta ads)
-smalltalk/            Small Talk landing page
-kneedeep/             Knee Deep landing page
-discog/               Discography landing page
+index.html            Home page (hero, music, label, contact). Shows only the latest release.
+middle/ putitdown/ believe/ ...   One landing page per song (use these for Meta ads)
+discog/               Discography page: the playlist, plus a list of every release
 links/                Link-in-bio page for the Instagram profile
+404.html              "Page not found" page (GitHub Pages shows it automatically)
+robots.txt            Tells search engines everything is fine to crawl (and where the sitemap is)
+sitemap.xml           List of public pages for search engines (appears once SITE_URL is set)
 style.css             All the styling
-pixel.js              Meta Pixel + streaming-button click tracking (off until an ID is set)
+pixel.js              Meta Pixel + streaming-button click tracking
+app-links.js          Opens Spotify in the app from Instagram/Facebook/TikTok in-app browsers
+previews.js           Tap-to-play preview on the cover art
+previews/             The short preview clips played when you tap the cover art
 img/                  Optimised WebP images used on the site
 src-images/           Original images (not served, used to make img/)
-tools/build.py        Generates the release pages, links/ and the music section of index.html
+tools/releases.py     The release data: titles, credits, links, covers. Edit this to change a song.
+tools/build.py        Generates every song page, discog/, links/ and the home page's hero and music block
 tools/optimize-images.py   Makes img/ from src-images/
 tools/icons/          Platform logos (Simple Icons, public domain), inlined into the pages by build.py
 AGENTS.md / CLAUDE.md Notes for AI coding assistants
@@ -33,19 +38,23 @@ as `middle/` won't open correctly that way.
 
 ## Common tasks
 
-**Change a streaming link, or add a release:** edit the `RELEASES` list in `tools/build.py`, then run
+**Change a streaming link, or add a release:** edit the list in `tools/releases.py`, then run
 
 ```
 python3 tools/build.py
 ```
 
-This rewrites every release page, `links/index.html` and the music section of the home page, so
+This rewrites every song page, `discog/`, `links/` and the home page's hero and music block, so
 they always agree. Commit the result. (The generated files are marked in `AGENTS.md`; don't edit
-them by hand, as the next build will overwrite your changes.)
+them by hand, as the next build will overwrite your changes.) Releases are listed newest first, and
+the first one is automatically the "new release" on the home page, in the hero and on the link-in-bio
+page. The steps for a new release (what to gather, in what order) are in `AGENTS.md`.
 
-**Change text, the hero, label or contact sections, or the styling:** edit `index.html` or
-`style.css` directly. Anything outside the `releases:start` / `releases:end` markers in
-`index.html` is hand-written.
+**Extended mix links:** each song's Beatport and Bandcamp links sit under their own "Extended mix"
+heading on its page. That is the `extended` list in `tools/releases.py`.
+
+**Change text, the label or contact sections, or the styling:** edit `index.html` or `style.css`
+directly. Anything outside the `hero-release` and `releases` markers in `index.html` is hand-written.
 
 **Swap an image:** replace the original in `src-images/` (keep the file name), then run
 
@@ -60,8 +69,10 @@ pixel off). Every release page and `links/` sends a PageView, plus a custom `Str
 (with `platform` and `release`) whenever a streaming button is clicked. If you advertise in the
 EU, UK or similar regions, check whether you need a consent banner first.
 
-**Set the domain for share previews:** put the live address in `SITE_URL` in `tools/build.py`
-(for example `"https://yourdomain.com"`) and rebuild. This adds og:url and og:image tags.
+**Set the domain:** put the live address in `SITE_URL` in `tools/build.py` (for example
+`"https://yourdomain.com"`, no trailing slash) and rebuild. This adds og:url and og:image tags for
+share previews, and writes `sitemap.xml` (it is skipped while `SITE_URL` is empty, because sitemaps
+need full addresses) and adds a `Sitemap:` line to `robots.txt`.
 
 ## Still to do
 
