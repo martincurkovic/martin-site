@@ -346,6 +346,107 @@ RELEASES = [
             ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com/album/back-again"),
         ],
     ),
+    dict(
+        key="cant-fight-it", slug="cantfightit", title="Can't Fight It",
+        artists="Martin Curkovic & 22DEADROSES", date="2024-05-24",
+        cover="cant-fight-it.webp", cover_size=(480, 480), preview="previews/cantfightit.mp3",
+        desc="Listen to Can't Fight It by Martin Curkovic & 22DEADROSES on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/4hV6W081g1IvLAR6vRat3C?si=f8f9f5de108d4ba4"),
+            ("apple-music", "Apple Music", "https://geo.music.apple.com/album/cant-fight-it/1744372093?i=1744372094&app=music"),
+            ("youtube-music", "YouTube Music", "https://music.youtube.com/watch?v=eUdQWt7Y-eY"),
+            ("youtube", "YouTube", "https://www.youtube.com/watch?v=eUdQWt7Y-eY"),
+            ("soundcloud", "SoundCloud", "https://soundcloud.com/martincurkovic/22deadroses-martin-curkovic-cant-fight-it"),
+            ("tidal", "Tidal", "https://tidal.com/browse/track/360937904"),
+            ("deezer", "Deezer", "https://www.deezer.com/track/2783663872"),
+        ],
+        extended=[
+            ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com/track/cant-fight-it"),
+        ],
+    ),
+    dict(
+        key="what-you-need", slug="whatyouneed", title="What You Need",
+        artists="Martin Curkovic", date="2024-05-10",
+        cover="what-you-need.webp", cover_size=(480, 480), preview="previews/whatyouneed.mp3",
+        desc="Listen to What You Need by Martin Curkovic on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/5UgIGBVNHJXcq9A8Np5C9q?si=7eccede9e23e4a50"),
+            ("apple-music", "Apple Music", "https://geo.music.apple.com/album/what-you-need-radio-edit/1744227623?i=1744227624&app=music"),
+            ("youtube-music", "YouTube Music", "https://music.youtube.com/watch?v=FPdDdhd4rCk"),
+            ("youtube", "YouTube", "https://youtu.be/FPdDdhd4rCk"),
+            ("soundcloud", "SoundCloud", "https://soundcloud.com/martincurkovic/what-you-need"),
+            ("tidal", "Tidal", "https://tidal.com/browse/track/360876984"),
+            ("deezer", "Deezer", "https://www.deezer.com/track/2783270942"),
+        ],
+        extended=[
+            ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com/album/what-you-need"),
+        ],
+    ),
+    dict(
+        key="lose-control", slug="losecontrol", title="Lose Control",
+        artists="Martin Curkovic", date="2024-04-05",
+        cover="lose-control.webp", cover_size=(480, 480), preview="previews/losecontrol.mp3",
+        desc="Listen to Lose Control by Martin Curkovic on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/2F0ec7WxWldrdJDJsYnUrM?si=b8e8cee5da644798"),
+            ("apple-music", "Apple Music", "https://geo.music.apple.com/album/lose-control/1737575401?i=1737575402&app=music"),
+            ("youtube-music", "YouTube Music", "https://www.youtube.com/watch?v=sABbvfgQpqo"),
+            ("soundcloud", "SoundCloud", "https://soundcloud.com/martincurkovic/lose-control"),
+            ("tidal", "Tidal", "https://tidal.com/browse/track/353777871"),
+            ("deezer", "Deezer", "https://www.deezer.com/track/2718565112"),
+        ],
+        extended=[
+            ("beatport", "Beatport", "https://www.beatport.com/release/lose-control-original-mix/4507558"),
+            ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com/album/lose-control"),
+        ],
+    ),
+    dict(
+        key="do-you-think-of-me-too", slug="dytomt", title="do you think of me too?",
+        artists="Martin Curkovic", date="2024-03-15",
+        cover="do-you-think-of-me-too.webp", cover_size=(480, 480), preview="previews/dytomt.mp3",
+        desc="Listen to do you think of me too? by Martin Curkovic on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/3wllpeOviGCs8VbIsYDfSj?si=db8d3cd5b4f44ce8"),
+            ("apple-music", "Apple Music", "https://music.apple.com/au/album/do-you-think-of-me-too-radio-edit/1733242348?i=1733242349"),
+            ("soundcloud", "SoundCloud", "https://soundcloud.com/martincurkovic/do-you-think-of-me-too-radio-edit"),
+            ("tidal", "Tidal", "https://tidal.com/browse/track/348442829"),
+        ],
+        extended=[
+            ("beatport", "Beatport", "https://www.beatport.com/track/do-you-think-of-me-too-original-mix/18752476"),
+            ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com/album/do-you-think-of-me-too"),
+        ],
+    ),
+    dict(
+        key="sensation-one-more-time", slug="sensation", title="Sensation (One More Time)",
+        artists="Martin Curkovic", date="2024-02-16",
+        cover="sensation-one-more-time.webp", cover_size=(480, 480), preview="previews/sensation.mp3",
+        desc="Listen to Sensation (One More Time) by Martin Curkovic on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/6PblZgcUxUzefvlvCdMezg?si=c92875bf731c480f"),
+            ("apple-music", "Apple Music", "https://geo.music.apple.com/album/sensation-one-more-time/1729801744?i=1729801745&app=music"),
+            ("tidal", "Tidal", "https://tidal.com/browse/track/344444745"),
+            ("deezer", "Deezer", "https://www.deezer.com/track/2654277002"),
+        ],
+        extended=[
+            ("beatport", "Beatport", "https://www.beatport.com/release/sensation-one-more-time/4442861"),
+        ],
+    ),
+    dict(
+        key="chemicals", slug="chemicals", title="Chemicals",
+        artists="Martin Curkovic", date="2023-11-10",
+        cover="chemicals.webp", cover_size=(480, 480), preview="previews/chemicals.mp3",
+        desc="Listen to Chemicals by Martin Curkovic on Spotify, Apple Music and more.",
+        platforms=[
+            ("spotify", "Spotify", "https://open.spotify.com/track/2Iq1He0ebQcic0xi5kTKKq?si=c4d01b1a191c4d7e"),
+            ("apple-music", "Apple Music", "https://geo.music.apple.com/album/chemicals-radio-edit/1714631684?i=1714631685&app=music"),
+            ("youtube-music", "YouTube Music", "https://www.youtube.com/watch?v=WFIRcyg9gTE"),
+            ("tidal", "Tidal", "https://tidal.com/browse/album/328196372"),
+            ("deezer", "Deezer", "https://deezer.page.link/k6H1Bw1xHyecYRUj6"),
+        ],
+        extended=[
+            ("beatport", "Beatport", "https://www.beatport.com/release/chemicals/4325646"),
+        ],
+    ),
 ]
 
 # The playlist landing page at /discog/ (also lists every release above).

@@ -110,9 +110,8 @@ resolve to `index.html` under `file://`. A browser may cache `style.css` while y
   were found. Add them to `tools/releases.py` if they exist.
 - `Mixtape Vol.1 [Lo-Fi House]` (`mixtape/`) is not a song: a Bandcamp-only release on 2025-05-09. The old
   ToneDen page also had a SoundCloud link, kept for now.
-- Nine releases on Apple Music have no page (no ToneDen link): Feel You In My Mind, Hey Mr. Postman, Body
-  All Bangin', Can't Fight It, Sensation (One More Time), Lose Control, What You Need, do you think of me
-  too?, Chemicals.
+- Three releases on Apple Music have no page because they never had a ToneDen link: Feel You In My Mind,
+  Hey Mr. Postman, Body All Bangin'. They need their links from Martin.
 - The Meta Pixel has no consent banner. Decide whether one is needed for the regions Martin advertises in.
 - The VIP email signup was dropped. Undecided whether to link to a hosted signup page.
 - The preview clips are Spotify's own (five are only about 15 s). Replacing them with clips cut from
