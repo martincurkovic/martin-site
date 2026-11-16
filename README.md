@@ -18,6 +18,7 @@ img/                  Optimised WebP images used on the site
 src-images/           Original images (not served, used to make img/)
 tools/build.py        Generates the release pages, links/ and the music section of index.html
 tools/optimize-images.py   Makes img/ from src-images/
+tools/icons/          Platform logos (Simple Icons, public domain), inlined into the pages by build.py
 AGENTS.md / CLAUDE.md Notes for AI coding assistants
 ```
 

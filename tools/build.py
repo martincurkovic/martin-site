@@ -88,6 +88,18 @@ ICON = (
 
 e = escape
 
+# Platform key -> file in tools/icons/ (Simple Icons, CC0). Keys not listed use their own name.
+ICON_FILES = {"apple-music": "applemusic", "youtube-music": "youtubemusic", "amazon-music": "amazonmusic"}
+
+
+def platform_icon(key):
+    """Inline SVG for a platform, or '' if there isn't one. Decorative: the text label stays."""
+    f = ROOT / "tools" / "icons" / f"{ICON_FILES.get(key, key)}.svg"
+    if not f.exists():
+        return ""
+    paths = "".join(f'<path d="{d}"/>' for d in re.findall(r' d="([^"]+)"', f.read_text(encoding="utf-8")))
+    return f'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">{paths}</svg>'
+
 
 def head(title, desc, prefix, path, cover=None, noindex=False):
     """<head> for a page one folder deep (prefix '../') or at the root (prefix '')."""
@@ -114,11 +126,21 @@ def head(title, desc, prefix, path, cover=None, noindex=False):
     return "\n".join(lines)
 
 
+def app_uri(key, url):
+    """App deep link (spotify:track:ID) for in-app browsers, which ignore normal app handoff. Else ''."""
+    m = re.match(r"https://open\.spotify\.com/(track|album|playlist|artist)/(\w+)", url) if key == "spotify" else None
+    return f"spotify:{m.group(1)}:{m.group(2)}" if m else ""
+
+
 def buttons(rel):
     items = []
     for i, (key, label, url) in enumerate(rel["platforms"]):
         cls = ' class="primary"' if i == 0 else ""
-        items.append(f'    <li><a{cls} data-platform="{key}" href="{e(url)}">{e(label)}</a></li>')
+        app = app_uri(key, url)
+        data_app = f' data-app="{app}"' if app else ""
+        items.append(
+            f'    <li><a{cls} data-platform="{key}"{data_app} href="{e(url)}">{platform_icon(key)}{e(label)}</a></li>'
+        )
     return "\n".join(items)
 
 
@@ -130,7 +152,7 @@ SOCIALS = (
     "  </p>"
 )
 
-PIXEL_TAG = '<script src="../pixel.js" defer></script>'
+SCRIPT_TAGS = '<script src="../pixel.js" defer></script>\n<script src="../app-links.js" defer></script>'
 
 
 def release_page(rel):
@@ -157,7 +179,7 @@ def release_page(rel):
   <p class="more"><a href="../">More from Martin Curkovic</a></p>
 </main>
 
-{PIXEL_TAG}
+{SCRIPT_TAGS}
 
 </body>
 </html>
@@ -195,7 +217,7 @@ def links_page():
 {SOCIALS}
 </main>
 
-{PIXEL_TAG}
+{SCRIPT_TAGS}
 
 </body>
 </html>

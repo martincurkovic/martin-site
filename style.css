@@ -152,7 +152,10 @@ footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--m
 .bio .by { margin: 6px 0 24px; color: var(--muted); }
 .bio .stack { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .bio .stack a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   padding: 15px 18px;
   border: 1px solid var(--line);
   background: var(--chip);
@@ -163,6 +166,7 @@ footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--m
   text-decoration: none;
 }
 .bio .stack a:hover, .bio .stack a:focus-visible { border-color: var(--fg); }
+.bio .stack .icon { width: 20px; height: 20px; flex: none; fill: currentColor; }
 .bio .stack a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .bio h2 { font-size: 13px; margin: 36px 0 12px; color: var(--muted); letter-spacing: .2em; }
 .bio .more { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; margin-top: 28px; }

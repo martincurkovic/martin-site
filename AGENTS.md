@@ -21,9 +21,14 @@ ToneDen smart links that were used for Instagram and Meta ads. Hosted free as st
   names match the old ToneDen URLs on purpose.
 - `links/`: link-in-bio hub for the Instagram bio (latest release plus links to the others).
 - `style.css`: the only stylesheet. `pixel.js`: Meta Pixel and click tracking (Pixel ID set at the top).
+- `app-links.js`: inside Instagram/Facebook/TikTok in-app browsers, opens Spotify in the app (tries the
+  `data-app="spotify:track:ID"` link, falls back to the web link after 1.5 s). Regular browsers are untouched.
+  `build.py` adds `data-app` to Spotify buttons automatically.
 - `img/`: optimised WebP images used by the site. `src-images/`: originals, not served.
 - `tools/build.py`: generates the release pages, `links/index.html` and the music section of `index.html`.
 - `tools/optimize-images.py`: turns `src-images/` into `img/`.
+- `tools/icons/`: platform logo SVGs from Simple Icons (CC0), inlined as `<svg>` next to each streaming
+  button label by `build.py`. Icons are decorative (`aria-hidden`); the text label always stays.
 
 ## Generated files: do not hand-edit
 
@@ -42,6 +47,37 @@ python3 -m http.server 8000         # preview at http://localhost:8000
 
 Preview with the local server, not by opening files directly: folder links like `middle/` do not
 resolve to `index.html` under `file://`.
+
+## Adding a new release
+
+**What Martin needs to provide** (ask for anything that is missing):
+
+1. **Title and credited artists**, exactly as shown on Apple Music/Spotify. Check collaborators.
+2. **Cover art**: square, at least 640x640 (the distributor's 3000x3000 original is ideal), JPG or PNG.
+3. **Streaming links**, only for platforms where it is actually out: Spotify, Apple Music, Beatport,
+   Bandcamp, SoundCloud, YouTube (or YouTube Music), Tidal, Deezer, Amazon Music. Use clean URLs:
+   strip tracking parameters (`at=`, `ct=`, `utm_*`, affiliate `tag=`). Spotify's `?si=` share token
+   is also left off. Martin suspects it helps links open the app, which is untested; if that proves
+   true, add it to the Spotify URLs in `RELEASES`.
+4. **Optional 30-second preview** (planned, not built yet): a master or WAV plus the start time of the
+   30 seconds. Plan: AAC 96 kbps with 1 s fades (about 360 KB), a play button on the artwork, loaded
+   only on tap. A release with no clip simply has no play button.
+
+**Steps**
+
+1. Save the cover as `src-images/<key>.jpg`, add a line for it to `JOBS` in `tools/optimize-images.py`
+   (480 px wide WebP, quality 78) and run `python3 tools/optimize-images.py`.
+2. Add an entry to `RELEASES` in `tools/build.py`, **newest first** (`RELEASES[0]` drives the `links/`
+   hub). Fields: `key` (anchor id; also the pixel `release` name), `slug` (folder name: short,
+   lowercase, no hyphens, like the old ToneDen URLs), `title`, `artists`, optional `tagline`,
+   `cover`, `cover_size`, `desc`, and `platforms` as `(pixel key, label, url)` tuples. Put Spotify first
+   (it is the highlighted button); then Apple Music, Beatport, Bandcamp, SoundCloud, YouTube, Tidal,
+   Deezer, Amazon. Pixel keys with icons: `spotify apple-music beatport soundcloud youtube
+   youtube-music tidal deezer bandcamp amazon-music` (an unknown key just has no icon).
+3. Update the hand-written "New release" block in the hero of `index.html` (title, credit, `#anchor`).
+4. Run `python3 tools/build.py`, preview with `python3 -m http.server 8000`, and click every link.
+5. `git add` and suggest a commit message. The ad URL is `/<slug>/` on the live domain; the pixel
+   reports `release=<key>` on each click.
 
 ## Open items
 
