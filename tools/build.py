@@ -260,7 +260,9 @@ def index_cards():
     """Home page: only the latest release, then a link to the full discography."""
     r = RELEASES[0]
     w, h = r["cover_size"]
-    chips = "\n".join(f'              <li><a href="{e(url)}">{e(label)}</a></li>' for _, label, url in r["platforms"])
+    chips = "\n".join(
+        f'              <li><a href="{e(url)}">{platform_icon(key)}{e(label)}</a></li>' for key, label, url in r["platforms"]
+    )
     return f"""        <article class="release-card" id="{r["key"]}">
           <img src="img/{r["cover"]}" width="{w}" height="{h}" alt="{e(r["title"])} cover art">
           <div>
