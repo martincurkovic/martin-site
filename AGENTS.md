@@ -37,12 +37,14 @@ site-builder site and ToneDen smart links.
 - `tools/releases.py`: **the release data. Edit this.** `tools/build.py`: generates the release pages,
   `discog/`, `links/`, `404.html`, `robots.txt`, `sitemap.xml` and the hero, music and share-card blocks of
   `index.html`. `tools/optimize-images.py`: `src-images/` to `img/`. `tools/icons/`: Simple Icons logos
-  (CC0), inlined as decorative `<svg>` next to each button label (the text label always stays).
+  (CC0), inlined as decorative `<svg>` next to each button label (the text label always stays). The social
+  links (Contact buttons, song-page footers) are the `SOCIAL_LINKS` list in `build.py`.
 
 ## Generated files: do not hand-edit
 
 The release pages, `discog/index.html`, `links/index.html`, `404.html`, `robots.txt`, `sitemap.xml` and the
-blocks between the `hero-release`, `releases` and `share-card` start/end markers in `index.html` are written
+blocks between the `hero-release`, `releases`, `socials` and `share-card` start/end markers in
+`index.html` are written
 by `tools/build.py`. Change the data in `tools/releases.py` (or the templates in `build.py`), run
 `python3 tools/build.py`, and commit the output. Everything else in `index.html` and `style.css` is edited
 by hand.

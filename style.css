@@ -108,7 +108,9 @@ nav a:hover, nav a:focus-visible { color: var(--fg); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .chips a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 7px 14px;
   border: 1px solid var(--line);
   background: var(--chip);
@@ -116,6 +118,7 @@ nav a:hover, nav a:focus-visible { color: var(--fg); }
   text-decoration: none;
 }
 .chips a:hover, .chips a:focus-visible { border-color: var(--fg); }
+.chips .icon { width: 16px; height: 16px; flex: none; fill: currentColor; }
 
 /* ---------- sections ---------- */
 

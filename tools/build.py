@@ -116,13 +116,29 @@ def buttons(rel):
     return html
 
 
+# (icon key in tools/icons/, label, url). The home page's Contact buttons show all of these; the footer
+# on the song pages shows the first three, as text.
+SOCIAL_LINKS = [
+    ("instagram", "Instagram", "https://www.instagram.com/martincurkovic.mp3"),
+    ("tiktok", "TikTok", "https://www.tiktok.com/@martincurkovic"),
+    ("youtube", "YouTube", "https://www.youtube.com/@martin_curkovic/"),
+    ("soundcloud", "SoundCloud", "https://soundcloud.com/martincurkovic"),
+    ("bandcamp", "Bandcamp", "https://martincurkovic.bandcamp.com"),
+    ("facebook", "Facebook", "https://www.facebook.com/profile.php?id=61553005597203"),
+]
+
 SOCIALS = (
     '  <p class="more">\n'
-    '    <a href="https://www.instagram.com/martincurkovic.mp3">Instagram</a>\n'
-    '    <a href="https://www.tiktok.com/@martincurkovic">TikTok</a>\n'
-    '    <a href="https://www.youtube.com/@martin_curkovic/">YouTube</a>\n'
-    "  </p>"
+    + "\n".join(f'    <a href="{e(url)}">{e(label)}</a>' for _, label, url in SOCIAL_LINKS[:3])
+    + "\n  </p>"
 )
+
+
+def socials_chips():
+    """The Contact buttons on the home page: each platform with its logo (decorative; the label stays)."""
+    return "\n".join(
+        f'        <li><a href="{e(url)}">{platform_icon(key)}{e(label)}</a></li>' for key, label, url in SOCIAL_LINKS
+    )
 
 PLAY_ICONS = (
     '<span class="play-icon" aria-hidden="true">'
@@ -339,6 +355,7 @@ def main():
 
     index = ROOT / "index.html"
     src = index.read_text(encoding="utf-8")
+    src = fill(src, "socials", socials_chips())
     src = fill(src, "share-card", home_head_tags())
     src = fill(src, "hero-release", hero_block())
     src = fill(src, "releases", index_cards())

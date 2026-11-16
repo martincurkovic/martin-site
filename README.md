@@ -56,6 +56,8 @@ steps for a new release are in `AGENTS.md`.
 
 **Change text, the About, label or contact sections, or the styling:** edit `index.html` or
 `style.css` directly. Anything outside the generated markers in `index.html` is hand-written.
+The Contact buttons are the exception: they come from `SOCIAL_LINKS` in `tools/build.py`, so to
+change or add a social link, edit that list and rebuild.
 
 **Swap an image:** replace the original in `src-images/` (keep the file name), then run
 
