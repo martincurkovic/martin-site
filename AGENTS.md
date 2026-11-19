@@ -7,7 +7,7 @@ site-builder site and ToneDen smart links.
 ## Goals and constraints
 
 - **Lightweight above all.** Many visitors are on slow connections. No frameworks, no web fonts, no
-  animations, no third-party scripts except the Meta Pixel. Keep pages small.
+  animations, no third-party scripts except the Meta Pixel and Umami Cloud (stats). Keep pages small.
 - Plain HTML and CSS plus three tiny vanilla JS files (`pixel.js`, `app-links.js`, `previews.js`), loaded
   only on song pages and `links/`. The home page loads none.
 - Mobile first and responsive. Test narrow widths.
@@ -28,7 +28,7 @@ site-builder site and ToneDen smart links.
   even a nested one like `/a/b/`, so it alone uses **root-based** paths (`/style.css`). `robots.txt` allows
   everything: `/links/` is kept out of search by its `noindex` tag, and blocking it would hide that tag.
   `sitemap.xml` lists the public pages (not `/links/`, not 404).
-- `style.css`; `pixel.js` (Meta Pixel and click tracking); `app-links.js` (inside Instagram/Facebook/TikTok
+- `style.css`; `pixel.js` (Meta Pixel, Umami Cloud and click tracking); `app-links.js` (inside Instagram/Facebook/TikTok
   in-app browsers, opens Spotify in the app: tries `data-app="spotify:track:ID"`, falls back to the web link
   after 1.5 s; regular browsers are untouched); `previews.js` and `previews/` (tap the cover art to hear
   a clip).
@@ -69,7 +69,10 @@ resolve to `index.html` under `file://`. A browser may cache `style.css` while y
 - DNS is at GoDaddy: four `A` records for `@` (185.199.108.153, 185.199.109.153, 185.199.110.153,
   185.199.111.153) and a `www` `CNAME` to `martincurkovic.github.io`. Martin's email is on iCloud, so
   **never touch the MX or TXT records, the `sig1._domainkey` CNAME, or the `_atproto` TXT record.**
-- The Meta Pixel ID (759056146233741) is set at the top of `pixel.js`.
+- The Meta Pixel ID (759056146233741) and the Umami website ID are set at the top of `pixel.js`. Both are
+  public by design (they sit in the page source). The repo is public, so never commit secrets: no Umami
+  login or API keys. The site never needs them. Stats are at https://cloud.umami.is (Events tab: click
+  breakdown by `platform` and `release`). Umami only counts hits from `martincurkovic.com`.
 
 ## Adding a new release
 

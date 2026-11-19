@@ -72,6 +72,12 @@ pixel off). Every release page and `links/` sends a PageView, plus a custom `Str
 (with `platform` and `release`) whenever a streaming button is clicked, and `PreviewPlay` when a
 preview is played.
 
+**Umami Cloud (stats dashboard):** `UMAMI_ID` at the top of `pixel.js` (clear it to switch it off).
+It records page views and the same `StreamingLinkClick` / `PreviewPlay` events with `platform` and
+`release`. View them at https://cloud.umami.is (Events tab, group by property). It only counts hits
+from `martincurkovic.com`, so local previews are ignored. Put UTM parameters on ad URLs
+(`?utm_source=meta&utm_medium=paid&utm_campaign=<name>`) to compare campaigns.
+
 **The domain:** `SITE_URL` in `tools/build.py` is `https://martincurkovic.com` (no trailing slash). It
 adds the share-card tags (og:url, og:image, canonical), writes `sitemap.xml` and adds the `Sitemap:`
 line to `robots.txt`. If you change domain, edit `SITE_URL` and the `CNAME` file, and rebuild.

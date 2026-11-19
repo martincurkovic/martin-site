@@ -21,10 +21,10 @@
       if (audio.duration) btn.style.setProperty('--p', audio.currentTime / audio.duration);
     });
     audio.addEventListener('error', function () { state(false); });
-    // Meta Pixel (only if it has loaded): count the first play of the preview.
-    if (window.fbq) {
-      fbq('trackCustom', 'PreviewPlay', { release: document.body.getAttribute('data-release') });
-    }
+    // Meta Pixel and Umami (only if they have loaded): count the first play of the preview.
+    var props = { release: document.body.getAttribute('data-release') };
+    if (window.fbq) fbq('trackCustom', 'PreviewPlay', props);
+    if (window.umami) umami.track('PreviewPlay', props);
   }
 
   btn.addEventListener('click', function () {
